@@ -1,0 +1,33 @@
+create table employees(
+EmpId VARCHAR2(3) primary key ,
+Ename Varchar2(25) Not Null,
+DOB date Not Null,
+DOJ date Not Null,
+Salary Number(7) Not Null CHECK (Salary>0),
+CONSTRAINT CHK_Person CHECK (EmpId like 'E%'),
+CONSTRAINT later_than_DOB CHECK (DOB<DOJ)
+ );
+ 
+ select *from employees;
+ truncate table employees;
+ drop table employees;
+ insert into employees values('E1','rohit sharma','25-Feb-2002','03-jan-2020',100000);
+ insert into employees values('E2','shivam sharma','13-oct-2000','05-jul-2021',590000);
+ insert into employees values('E3','vishal chaturvedi','18-oct-2000','10-feb-2020',105000);
+ insert into employees values('E4','nikunj','30-may-2000','15-aug-2019',9000000);
+ insert into employees values('E5','prabhat','03-aug-1999','05-mar-2021',88000);
+
+update employees set Salary=35000 where EmpId='E4';
+
+select *from employees where DOJ='05-jul-2021';--1
+select to_char(DOJ,'month-dd-yyyy') from employees where DOJ='03-jan-2020';--2
+SELECT * FROM employees WHERE TO_CHAR(DOJ,'YYYY')<2018;--3
+select * from employees where EXTRACT(year from DOJ)<2020;--3
+
+
+select * from employees where DOJ<to_date('15-aug-2020','dd-mon-yyyy');
+select * from employees where EXTRACT(year from DOJ)<2020;
+select * EXTRACT(year from DOJ)<2020;--3
+
+
+select * from employees where extract(month from DOJ)=extract(month from to_date('01-jan-2020'));
