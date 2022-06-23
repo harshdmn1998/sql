@@ -1,0 +1,23 @@
+create table emp
+(
+empid number(10),
+name varchar(20),
+salary number(10)
+)
+
+create or replace procedure proc1 
+(
+id in emp.empid%type,
+name in emp.name%type,
+sal in emp.salary%type
+)
+is 
+BEGIN
+insert into emp values(id,name,sal);
+END;
+
+BEGIN
+proc1(003,'Anil Ambani',18000);
+END;
+
+select * from emp;
